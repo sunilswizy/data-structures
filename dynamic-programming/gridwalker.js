@@ -27,7 +27,7 @@ function gridWalker(n, m, cache = {}) {
 
 
 // console.log(gridWalker(2, 3));
-console.log(gridWalker(18, 18));
+console.log(gridWalker(23, 12));
 console.log(calculation)
 
 //o(2^n+m) //time brute force
