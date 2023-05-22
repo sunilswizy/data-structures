@@ -8,52 +8,38 @@ const graph = {
     f: []
 }
 
-function DFS(graph, source) {
-
-    let stack = [ source ]; 
-
-
-    while(stack.length) {
-        
-        let currentStack = stack.pop();
-        console.log(currentStack);
-
-        for(let item of graph[currentStack]) {
-            console.log("items", item)
-            stack.push(item);
+function dfs(root, start, results) {
+    
+    results.push(start)
+    for(let item of root[start]) {
+        for(let edge of item) {
+            dfs(root, edge, results)
         }
     }
-    return null;
 
+    return results;
 }
 
-function DFSRecursive(graph, stack = []) {
+function bfs(root, start) {
+    let res = [];
 
-    if(!stack.length) {
-        return null;
-    } 
+    let queue = [start];
 
-    let currentNode = stack.pop();
-
-    console.log(currentNode);
-    for(let item of graph[currentNode]) {
-        stack.push(item);
+    while(queue.length) {
+        let current = queue.shift();
+        res.push(current);
+        for(let edge of root[current]) {
+            queue.push(edge);
+        }
     }
 
-    DFSRecursive(graph, stack);
+    return res;
 }
 
-function DFSSimple(graph, source) {
+console.log(dfs(graph, 'a', []));
+console.log(bfs(graph, 'a'))
 
-    console.log(source);
-    for(let item of graph[source]) {
-        DFSSimple(graph, item);
-    }
 
-    return null
-}
 
-console.log(DFSRecursive(graph, ['a']));
-console.log(DFS(graph,'a'));
-console.log(DFSSimple(graph,'a'));
+
 
